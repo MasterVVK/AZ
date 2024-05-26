@@ -1,20 +1,36 @@
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
-s = pd.Series([1, 2, 3, 4, 5])
-#print(s)
+# Установка начальной точки для генерации случайных чисел (для воспроизводимости)
+np.random.seed(42)
 
-data = {
-    'Name': ['John', 'Anna', 'Peter', 'Linda'],
-    'Age': [28, 24, 35, 32],
-    'City': ['New York', 'Paris', 'Berlin', 'London']
-}
-df = pd.DataFrame(data)
-#print(df)
+# Создание временных меток
+date_rng = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
 
+# Генерация случайных данных
+data = np.random.randn(len(date_rng))
 
-df = pd.read_csv('World-happiness-report-2024.csv')
-print(df.info())
-print(df.describe())
-print(df[['Country name', 'Regional indicator']])
-print(df.loc[56])
-print(df.loc[56, 'Healthy life expectancy'])
+# Создание временного ряда с помощью Pandas
+time_series = pd.Series(data, index=date_rng)
+
+# Визуализация временного ряда
+plt.figure(figsize=(10, 6))
+plt.plot(time_series, label='Случайные данные')
+plt.title('Временной ряд')
+plt.xlabel('Дата')
+plt.ylabel('Значение')
+plt.legend()
+plt.show()
+
+# Ресемплинг временного ряда по месяцам
+monthly_resampled = time_series.resample('ME').mean()
+
+# Визуализация ресемплированного временного ряда
+plt.figure(figsize=(10, 6))
+plt.plot(monthly_resampled, label='Ресемплированные данные (по месяцам)', color='orange')
+plt.title('Временной ряд (Ресемплированный по месяцам)')
+plt.xlabel('Дата')
+plt.ylabel('Среднее значение')
+plt.legend()
+plt.show()
