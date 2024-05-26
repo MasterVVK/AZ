@@ -22,13 +22,13 @@ print("Первые несколько строк DataFrame:\n", first_rows)
 mean_grades = df.mean(numeric_only=True)
 print("\nСредние оценки по предметам:")
 for subject, grade in mean_grades.items():
-    print(f"{subject}: {grade:.1f}")
+    print(f"{subject}: {grade:.2f}")
 
 # 4. Вычисление медианной оценки по каждому предмету
 median_grades = df.median(numeric_only=True)
 print("\nМедианные оценки по предметам:")
 for subject, grade in median_grades.items():
-    print(f"{subject}: {grade:.1f}")
+    print(f"{subject}: {grade:.2f}")
 
 # 5. Вычисление Q1 и Q3 для оценок по математике
 Q1_math = df['Математика'].quantile(0.25)
